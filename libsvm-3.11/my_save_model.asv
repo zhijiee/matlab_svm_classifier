@@ -1,0 +1,21 @@
+load('mdl.mat'); % opens the mat file with svm struct of model, variable name of struct is 'svm' 
+
+fid=fopen('Mymodel','w');
+
+fprintf(fid,'%s %s\n','svm_type','0'); 
+fprintf(fid,'%s %s\n','kernel_type','2'); % rbf 
+fprintf(fid,'%s %s\n','nr_class', '2'); % 
+fprintf(fid,'%s %s\n','degree', '3');
+
+fprintf(fid,'%s %s\n','total_sv',num2str(mdl.totalSV)); 
+fprintf(fid,'%s %s\n','rho',num2str(mdl.rho));
+
+fprintf(fid,'%s\n','SV');
+
+FullSVs=full(mdl.SVs);
+
+
+%for i=1:length(svm.SVs)
+    fprintf(fid, '%s', num2str(svm.sv_coef(i)));
+    fprintf(fid, '%s %s\n', [' 0:' num2str(FullSVs(i,1))],[' 1:' num2str(FullSVs(i,2))]);
+%end fclose(fid);
