@@ -14,7 +14,7 @@
     para.overlap = 50; %percentage
     para.maFeat = 1;%9; % averaging frames
     para.maStep = 1;%5; % shifting frames
-    para.fs = 256;
+    para.fs = 256; %sample period
 
     %para.dataDir= '..\data\2018_01_EEG_Recording\';
     para.dataDir= '.\data\';

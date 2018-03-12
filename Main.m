@@ -87,7 +87,7 @@ for iSubj=1:para.nsubject
         fFoldAcc(iSubj,iFold) = fAcc(1); 
         
         %save mdl into files
-        save('zhijie', 'mdl');
+        save('zhijie');
         save('fYTest','fYTest');
         save('fXTest','fXTest');
         
