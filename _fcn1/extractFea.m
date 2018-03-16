@@ -34,7 +34,8 @@ for iSeg = 1:numSeg
     for j =1:numChannel
         for m=1:nband
             xwinFeature(iSeg,iFeat) = xwinFeature1(iSeg,j,m);
-            iFeat = iFeat + 1;
+            iFeat = iFeat + 1;          
         end
     end
+    
 end

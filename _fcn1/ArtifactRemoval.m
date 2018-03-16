@@ -1,8 +1,10 @@
-function fOutEEGData = ArtifactRemoval(fInEEGData,para)
+function fOutEEGData = ArtifactRemoval(raw_fInEEGData,para)
 
     %== Bandpass-filter signals (0.3-45 Hz)
-    fInEEGData = filter(para.preFiltB,para.preFiltA,fInEEGData);
-    
+    dlmwrite('raw_eeg.csv',raw_fInEEGData, 'delimiter', ',', 'precision', 16); 
+    fInEEGData = filter(para.preFiltB,para.preFiltA,raw_fInEEGData);
+    dlmwrite('eeg_after_filter.csv',fInEEGData, 'delimiter', ',', 'precision', 16); 
+
     fRefData = zeros(size(fInEEGData));
     fOutEEGData = zeros(size(fInEEGData));
     datalength=length(fInEEGData);

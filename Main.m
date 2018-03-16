@@ -4,7 +4,7 @@
 % to get band setting similar to 
 addpath('.\_fcn1');  
 addpath('.\libsvm-3.11\matlab');
-close all; clc; clear all;
+%sclose all; clc; clear all;
 
 data = 'data';
 para_setting0; 
@@ -18,11 +18,15 @@ for iSubj=1:para.nsubject
     % Class0- Meditation; Class2- Stress
 
     [fEEGDataCl1,fEEGDataCl2] = extractData(fEEgData,para.ClassID);
+    %csvwrite('c1.csv',fEEGDataCl1);
 
     fEEGDataCl1 = ArtifactRemoval(fEEGDataCl1, para);
     fEEGDataCl2 = ArtifactRemoval(fEEGDataCl2, para);
+    %csvwrite('c1_AR.csv',fEEGDataCl1);
+    dlmwrite('eeg_ar_complete.csv', fEEGDataCl1, 'delimiter', ',', 'precision', 16); 
 
     fFeatCL1 = extractFea(fEEGDataCl1,para);
+    dlmwrite('eeg_extract_features.csv', fFeatCL1, 'delimiter', ',', 'precision', 16);    
     fFeatCL2 = extractFea(fEEGDataCl2,para);
     feaNo = size(fFeatCL1,2);                 %lzq: feaNo: number of bands - 1 = 6.
     nTrial1 = floor((size(fFeatCL1,1)-para.maFeat)/para.maStep);
@@ -87,9 +91,9 @@ for iSubj=1:para.nsubject
         fFoldAcc(iSubj,iFold) = fAcc(1); 
         
         %save mdl into files
-        save('zhijie');
-        save('fYTest','fYTest');
-        save('fXTest','fXTest');
+        %save('zhijie');
+        %save('fYTest','fYTest');
+        %save('fXTest','fXTest');
         
 
     end
