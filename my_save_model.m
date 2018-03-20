@@ -1,3 +1,6 @@
+
+function my_save_model()
+
 load('mdl.mat'); % opens the mat file with svm struct of model, variable name of struct is 'svm' 
 
 fid=fopen('svm_model.txt','w');
@@ -6,6 +9,7 @@ fid=fopen('svm_model.txt','w');
 fprintf(fid,'%s %s\n','svm_type','c_svc'); % c_svc
 fprintf(fid,'%s %s\n','kernel_type','rbf'); % rbf 
 fprintf(fid,'%s %s\n','degree', '3');
+fprintf(fid,'%s %s\n','gamma', '0.5');
 
 %Variables
 fprintf(fid,'%s %s\n','nr_class', '2'); % 
@@ -34,3 +38,4 @@ for i=1:mSize(1)
 end
 
 fclose(fid);
+end

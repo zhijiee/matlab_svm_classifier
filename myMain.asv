@@ -27,9 +27,9 @@ for iSubj=1:para.nsubject
     fFeatCL1 = extractFea(fEEGDataCl1,para);
     dlmwrite('eeg_extract_features.csv', fFeatCL1, 'delimiter', ',', 'precision', 16);    
     fFeatCL2 = extractFea(fEEGDataCl2,para);
+
+    % Are these useful??
     feaNo = size(fFeatCL1,2);                 %lzq: feaNo: number of bands - 1 = 6.
-%    nTrial1 = floor((size(fFeatCL1,1)-para.maFeat)/para.maStep);
-%    nTrial2 = floor((size(fFeatCL2,1)-para.maFeat)/para.maStep);
     nTrial1 = floor((size(fFeatCL1,1))/para.maStep);
     nTrial2 = floor((size(fFeatCL2,1))/para.maStep);
     fFeatureCLl = zeros(nTrial1,feaNo*2);                %lzq: create 2D with dims (30, 12)
@@ -84,6 +84,7 @@ for iSubj=1:para.nsubject
       
         %training
         mdl=libsvmtrain(fYTrain,fXTrain, '-b 1 -c 9 -g 0.5 -t 2 -q');
+        my_save_
         %testing
         [fClResult, fAcc, vv]=libsvmpredict(fYTest, fXTest, mdl, '-b 1');
         %fScore{iSubj,iFold}(:,:) = vv;

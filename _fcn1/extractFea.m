@@ -10,18 +10,24 @@ winEnd = [];
 winIdx = 1;                                        
 
 %==  Extract features
-winSz = floor(winLen*fs);     %lzq: window size for 3 seconds: 3 * 256 = 768         
+winSz = floor(winLen*fs);     %lzq: window size for 3 seconds: 2 * 256 = 512;         
 %window size (sample)
-winShift = floor( winSz*(100-overlap)/100);    %lzq: #samples overlapped : 0.5 * 3 * 256 = 384
+winShift = floor( winSz*(100-overlap)/100);    %lzq: #samples overlapped : 512 * (100-50)/100 = 256     --- 0.5 * 3 * 256 = 384
 %window shift size (sample)
-numSeg = floor((length(xm) - winSz)/winShift); %lzq: divided the 8 minutes data into 1.5 seconds block. total 318 blocks.
+
+numSeg = floor((length(xm) - winSz)/winShift) + 1; %lzq: divided the 8 minutes data into 1.5 seconds block. total 318 blocks.
+% Why num of segment not = (length(xm) - winShift)/winShift.. 1 seg
+% features left out
+
 numChannel = size(xm,2);
 
 nband = para.nband;
 
 xwinFeature = zeros(numSeg,nband * numChannel);      %create 2D array
 xm_filtered = bandpassfilter(xm,para);  % CTG: to breakdown input signal to 6 bands (delta, theta, alpha, lbeta, hbeta, gamma)
-                                        % multiple channels                      
+                                        % multiple channels   
+dlmwrite('extractFea_after_bandpass.csv', xm_filtered, 'delimiter', ',', 'precision', 16); 
+
 for iSeg = 1:numSeg
     xstart = (iSeg-1)*winShift +1;
     xend = (iSeg-1)*winShift + winSz;                           
