@@ -26,7 +26,11 @@ mSize = size(mdl.SVs);
 
 for i=1:mSize(1)
     fprintf(fid, '%s', num2str(mdl.sv_coef(i)));
-    fprintf(fid, '%s %s\n', [' 0:' num2str(FullSVs(i,1))],[' 1:' num2str(FullSVs(i,2))]);
+    %fprintf(fid, '%s %s\n', [' 0:' num2str(FullSVs(i,1))],[' 1:' num2str(FullSVs(i,2))]);
+    for j=1:mSize(2)
+       fprintf(fid, '%s %s', [' ' num2str(j-1) ':' num2str(FullSVs(i,j))]);
+    end
+    fprintf(fid, '\n');
 end
 
 fclose(fid);
