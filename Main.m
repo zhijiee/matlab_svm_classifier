@@ -1,10 +1,7 @@
-% cross validation for single subject
-% Initial version: zz.2014.06.04
-% Revision: ctg 2018.02
-% to get band setting similar to 
+% 10-fold Cross Validation per subject 
+
 addpath('.\_fcn1');  
 addpath('.\libsvm-3.11\matlab');
-%sclose all; clc; clear all;
 
 data = 'data';
 para_setting0; 
@@ -22,7 +19,7 @@ for iSubj=1:para.nsubject
 
     fEEGDataCl1 = ArtifactRemoval(fEEGDataCl1, para);
     fEEGDataCl2 = ArtifactRemoval(fEEGDataCl2, para);
-    dlmwrite('eeg_ar_complete.csv', fEEGDataCl1, 'delimiter', ',', 'precision', 16); 
+    dlmwrite('eeg_ar_complete.csv', fEEGDataCl1z, 'delimiter', ',', 'precision', 16); 
 
     fFeatCL1 = extractFea(fEEGDataCl1,para);
     dlmwrite('eeg_extract_features.csv', fFeatCL1, 'delimiter', ',', 'precision', 16);    
@@ -91,9 +88,6 @@ for iSubj=1:para.nsubject
         fScoreCL2{iSubj}(idx2,:) = vv(nCVTrial1+1:nCVTrial1+nCVTrial2,:);
         fFoldAcc(iSubj,iFold) = fAcc(1); 
         
-        %save mdl into files
-        %save('zhijie');        
-
     end
 end
 
@@ -151,6 +145,7 @@ function outScore = SmoothScore(inScore, para, nClassID)
     for k =1:nNumTrial-kMAComp
         fMAMat(k,k:k+kMAComp-1) = 1/kMAComp;
     end
+    
     for k =kMAComp:-1:1
         fMAMat(nNumTrial-k+1,nNumTrial-k+1:nNumTrial) = 1/k;
     end
