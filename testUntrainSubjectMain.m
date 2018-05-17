@@ -1,7 +1,4 @@
-% cross validation for single subject
-% Initial version: zz.2014.06.04
-% Revision: ctg 2018.02
-% to get band setting similar to 
+% To test the accuracy on a subject who is not included in the training dataset. 
 clear;
 addpath('.\_fcn1');  
 addpath('.\libsvm-3.11\matlab');

@@ -1,7 +1,6 @@
-% cross validation for single subject
-% Initial version: zz.2014.06.04
-% Revision: ctg 2018.02
-% to get band setting similar to 
+% cross validation for single subject. 
+% Developed this for UNIT testing of the Android Real-time Classifer
+
 addpath('.\_fcn1');  
 addpath('.\libsvm-3.11\matlab');
 %sclose all; clc; clear all;
